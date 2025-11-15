@@ -23,17 +23,18 @@ const {
   litersRequired,
 } = require("../calculators/environment");
 
-// Datos base para los tests (basados en network.js)
+const dataDummy = require("../calculators/ejercicio").dummyDataSet()
+// Datos base para los tests (basados en dataDummy)
 describe("Environment Calculator Tests", () => {
   
-  // Variables compartidas para los tests
+  // Variables compartidas para los tests - usando dataDummy
   const testIPC = 2.8;
   const nominalEnergy = 81.14;
   const autonomyNominal = 200;
-  const annualUse = 20000;
+  const annualUse = dataDummy.base_km;
   const fuelPrice = 1.2;
   const energyPrice = 1;
-  const emissionFactor = 0.25;
+  const emissionFactor = dataDummy.emision_factor_diesel;
   const combustionConsumptionValue = 50.6;
 
   describe("tiMonth", () => {
@@ -53,32 +54,32 @@ describe("Environment Calculator Tests", () => {
     it("should return gasoline data when fuel type is 'gasoline'", () => {
       assert.deepStrictEqual(fuelEnergySelector("gasoline"), {
         fuel_price: 16700,
-        fuel_energy: 35.58,
-        emision_factor: 69.25,
+        fuel_energy: dataDummy.gasoline_energy,
+        emision_factor: dataDummy.emision_factor_gasoline,
       });
     });
 
     it("should return gasoline data when fuel type is 'Gasoline' (capitalized)", () => {
       assert.deepStrictEqual(fuelEnergySelector("Gasoline"), {
         fuel_price: 16700,
-        fuel_energy: 35.58,
-        emision_factor: 69.25,
+        fuel_energy: dataDummy.gasoline_energy,
+        emision_factor: dataDummy.emision_factor_gasoline,
       });
     });
 
     it("should return diesel data when fuel type is 'diesel'", () => {
       assert.deepStrictEqual(fuelEnergySelector("diesel"), {
         fuel_price: 11795,
-        fuel_energy: 40.7,
-        emision_factor: 74.01,
+        fuel_energy: dataDummy.diesel_energy,
+        emision_factor: dataDummy.emision_factor_diesel,
       });
     });
 
     it("should return diesel data when fuel type is 'Diesel' (capitalized)", () => {
       assert.deepStrictEqual(fuelEnergySelector("Diesel"), {
         fuel_price: 11795,
-        fuel_energy: 40.7,
-        emision_factor: 74.01,
+        fuel_energy: dataDummy.diesel_energy,
+        emision_factor: dataDummy.emision_factor_diesel,
       });
     });
 
